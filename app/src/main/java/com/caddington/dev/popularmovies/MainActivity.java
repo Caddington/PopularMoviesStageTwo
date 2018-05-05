@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        movieRecyclerView = (RecyclerView) findViewById(R.id.movies_recycler_view);
+        movieRecyclerView = findViewById(R.id.movies_recycler_view);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         movieRecyclerView.setLayoutManager(gridLayoutManager);
 
@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
         moviesAdapter = new MoviesAdapter(this);
 
-
-
+        movieRecyclerView.setAdapter(moviesAdapter);
     }
 
     @Override
