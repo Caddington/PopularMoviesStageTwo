@@ -6,7 +6,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.caddington.dev.popularmovies.model.Movie;
 import com.caddington.dev.popularmovies.model.MovieList;
 import com.caddington.dev.popularmovies.service.MovieService;
 
@@ -21,8 +20,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
     private RecyclerView movieRecyclerView;
 
     private MoviesAdapter moviesAdapter;
-
-    public String movieOrdering = "popular";
 
     private String apiKey = "";
 
@@ -39,17 +36,18 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         movieRecyclerView.setAdapter(moviesAdapter);
 
         MovieService movieService = MovieService.retrofit.create(MovieService.class);
-        final Call<MovieList> movieCall = movieService.moviesSorted(movieOrdering, apiKey);
+        final Call<MovieList> movieCall = movieService.moviesSorted(MovieService.MOVIE_SORT_POPULAR, apiKey);
         movieCall.enqueue(new Callback<MovieList>() {
             @Override
             public void onResponse(Call<MovieList> call, Response<MovieList> response) {
 
-                MovieList movieList = response.body();
+                if (response.body() != null){
+                    MovieList movieList = response.body();
 
-                for (Movie movie : movieList.movies){
-                    System.out.println(movie.title + "\n" + movie.release_date + "\n" + movie.vote_average);
+                    //Set adapter movie list property and force rebind of all grid items.
+                    moviesAdapter.setMovies(movieList);
+                    moviesAdapter.notifyDataSetChanged();
                 }
-
             }
 
             @Override

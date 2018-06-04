@@ -5,5 +5,6 @@ public class Movie {
     public String overview;
     public Float vote_average;
     public String release_date;
+    public String poster_path;
 
 }

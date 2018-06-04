@@ -12,7 +12,11 @@ import retrofit2.http.Query;
 public interface MovieService {
 
 
-    public static final String BASE_URL = "https://api.themoviedb.org/3/";
+    String BASE_URL = "https://api.themoviedb.org/3/";
+    String BASE_POSTER_URL = "http://image.tmdb.org/t/p/w185";
+
+    String MOVIE_SORT_POPULAR = "popular";
+    String MOVIE_SORT_TOPRATED = "top_rated";
 
     @GET("movie/{ordering}")
     Call<MovieList> moviesSorted(@Path("ordering") String ordering, @Query("api_key") String apiKey);
