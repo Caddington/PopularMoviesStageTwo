@@ -63,12 +63,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     //Build URI for movie at List's index of position and load into its ImageView.
     private void loadMoviePoster(@NonNull ImageView posterImageView, int position) {
-        Uri posterUri;
 
-        posterUri = Uri.parse(MovieService.BASE_POSTER_URL + movies.get(position).poster_path);
+        /*Initialize to base poster URL. This is to handle the initial RecyclerView load when movies object is expected to be null (During background network call from MainActivity).
+        Setting to this will force the placeholder image to appear until network retrieval finishes and calls notifyDatasetChanged to rebind the views with poster images.
+         */
+        Uri posterUri = Uri.parse(MovieService.BASE_POSTER_URL);
+
+        if (movies != null) {
+            posterUri = Uri.parse(MovieService.BASE_POSTER_URL + movies.get(position).poster_path);
+        }
 
         Picasso.get()
                 .load(posterUri)
+                //TMDb logo used as placeholder with permission, as per https://www.themoviedb.org/about/logos-attribution.
+                .placeholder(R.drawable.tmdb_placeholder)
                 .fit()
                 .into(posterImageView);
     }
