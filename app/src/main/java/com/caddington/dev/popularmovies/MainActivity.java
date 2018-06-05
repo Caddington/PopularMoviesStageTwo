@@ -1,5 +1,6 @@
 package com.caddington.dev.popularmovies;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -61,5 +62,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
     @Override
     public void onGridItemClick(int clickedItemIndex) {
 
+        if (moviesAdapter.getMovies() != null){
+            Intent intent = new Intent(this, MovieDetailsActivity.class);
+            intent.putExtra("movie", moviesAdapter.getMovies().get(clickedItemIndex));
+            startActivity(intent);
+        }
     }
 }

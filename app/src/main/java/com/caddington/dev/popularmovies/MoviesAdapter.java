@@ -70,12 +70,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         Uri posterUri = Uri.parse(MovieService.BASE_POSTER_URL);
 
         if (movies != null) {
-            posterUri = Uri.parse(MovieService.BASE_POSTER_URL + movies.get(position).poster_path);
+            posterUri = Uri.parse(MovieService.BASE_POSTER_URL + movies.get(position).getPoster_path());
         }
 
         Picasso.get()
                 .load(posterUri)
-                //TMDb logo used as placeholder with permission, as per https://www.themoviedb.org/about/logos-attribution.
+                //TMDb logo used as placeholder with permission, per https://www.themoviedb.org/about/logos-attribution.
                 .placeholder(R.drawable.tmdb_placeholder)
                 .fit()
                 .into(posterImageView);
@@ -84,6 +84,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     //Setter used in MainActivity to pass retrieved movies.
     public void setMovies(MovieList movieList){
         this.movies = movieList.movies;
+    }
+
+    public List<Movie> getMovies(){
+        return this.movies;
     }
 
     public interface GridItemClickListener {
@@ -98,11 +102,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             super(itemView);
 
             posterImageView = (ImageView) itemView.findViewById(R.id.iv_poster);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-
+            gridItemClickListener.onGridItemClick(getAdapterPosition());
         }
     }
 }
