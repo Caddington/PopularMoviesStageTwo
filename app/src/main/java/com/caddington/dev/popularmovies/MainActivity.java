@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.caddington.dev.popularmovies.model.MovieList;
 import com.caddington.dev.popularmovies.service.MovieService;
@@ -37,8 +39,41 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         moviesAdapter = new MoviesAdapter(this);
         movieRecyclerView.setAdapter(moviesAdapter);
 
+        queryMovies(MovieService.MOVIE_SORT_POPULAR);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_mainactivity, menu);
+
+        return true;
+    }
+
+    //Handle user selecting "Popular" or "Top Rated" from ActionBar overflow menu. Query depending on which was tapped.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.sort_popular:
+                queryMovies(MovieService.MOVIE_SORT_POPULAR);
+                break;
+            case R.id.sort_toprated:
+                queryMovies(MovieService.MOVIE_SORT_TOPRATED);
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+    //Handle querying movies to keep onCreate clean. Accepts sort type as parameter
+    private void queryMovies(String sortOrder) {
+        //Referred to Retrofit source documentation for constructing calls like this.
         MovieService movieService = MovieService.retrofit.create(MovieService.class);
-        final Call<MovieList> movieCall = movieService.moviesSorted(MovieService.MOVIE_SORT_POPULAR, apiKey);
+        final Call<MovieList> movieCall = movieService.moviesSorted(sortOrder, apiKey);
         movieCall.enqueue(new Callback<MovieList>() {
             @Override
             public void onResponse(Call<MovieList> call, Response<MovieList> response) {
@@ -57,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
                 Log.e(TAG, t.getMessage());
             }
         });
-
     }
 
     @Override
@@ -65,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
         if (moviesAdapter.getMovies() != null){
             Intent intent = new Intent(this, MovieDetailsActivity.class);
-            intent.putExtra("movie", moviesAdapter.getMovies().get(clickedItemIndex));
+            intent.putExtra(getString(R.string.INTENT_EXTRA_KEY_MOVIE), moviesAdapter.getMovies().get(clickedItemIndex));
             startActivity(intent);
         }
     }

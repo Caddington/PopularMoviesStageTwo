@@ -3,4 +3,7 @@
     <string name="label_release_date">Released</string>
     <string name="label_vote_average">Average Vote</string>
     <string name="label_overview">Summary</string>
+    <string name="label_menu_sort_popularity">Popularity</string>
+    <string name="label_menu_sort_toprated">Top Rated</string>
+    <string name="INTENT_EXTRA_KEY_MOVIE">movie</string>
 </resources>
