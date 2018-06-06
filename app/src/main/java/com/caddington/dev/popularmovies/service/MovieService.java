@@ -11,7 +11,6 @@ import retrofit2.http.Query;
 
 public interface MovieService {
 
-
     String BASE_URL = "https://api.themoviedb.org/3/";
     String BASE_POSTER_URL = "http://image.tmdb.org/t/p/";
 
@@ -27,7 +26,7 @@ public interface MovieService {
     /*  Implement a static Retrofit builder in the interface itself, as seen in https://zeroturnaround.com/rebellabs/getting-started-with-retrofit-2/
         Chose this rather than building it in MainActivity to further abstract network operations from the activity itself.
      */
-    public static final Retrofit retrofit = new Retrofit.Builder()
+    Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();

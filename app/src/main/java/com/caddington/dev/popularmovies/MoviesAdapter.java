@@ -22,7 +22,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     private static final String TAG = MoviesAdapter.class.getSimpleName();
 
     private GridItemClickListener gridItemClickListener;
-    private Context context;
     private List<Movie> movies;
 
     public MoviesAdapter(GridItemClickListener gridItemClickListener){
@@ -36,9 +35,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.movie_grid_item, parent, false);
         MovieViewHolder movieViewHolder = new MovieViewHolder(view);
-
-        //Store parent context in class-level property.
-        context = parent.getContext();
 
         return movieViewHolder;
     }
