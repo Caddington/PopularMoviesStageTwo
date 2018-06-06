@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
     private MoviesAdapter moviesAdapter;
 
+    //Enter your TMDb API key here for app to work.
     private String apiKey = "";
 
     @Override

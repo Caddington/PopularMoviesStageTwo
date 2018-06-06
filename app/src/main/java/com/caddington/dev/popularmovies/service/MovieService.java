@@ -13,7 +13,10 @@ public interface MovieService {
 
 
     String BASE_URL = "https://api.themoviedb.org/3/";
-    String BASE_POSTER_URL = "http://image.tmdb.org/t/p/w185";
+    String BASE_POSTER_URL = "http://image.tmdb.org/t/p/";
+
+    String POSTER_SIZE_185 = "w185";
+    String POSTER_SIZE_ORIGINAL = "original";
 
     String MOVIE_SORT_POPULAR = "popular";
     String MOVIE_SORT_TOPRATED = "top_rated";
