@@ -102,3 +102,4 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         }
     }
 }
+
