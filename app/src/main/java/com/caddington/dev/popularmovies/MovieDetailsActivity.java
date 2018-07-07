@@ -5,17 +5,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.caddington.dev.popularmovies.databinding.ActivityMoviedetailsBinding;
 import com.caddington.dev.popularmovies.model.Movie;
 import com.caddington.dev.popularmovies.service.MovieService;
 import com.squareup.picasso.Picasso;
 
-public class MovieDetailsActivity extends AppCompatActivity {
+public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAdapter.ReviewClickListener, TrailersAdapter.TrailerClickListener {
 
     Movie movie;
 
     ActivityMoviedetailsBinding binding;
+
+    private TrailersAdapter trailersAdapter;
+    private ReviewsAdapter reviewsAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +35,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         loadPosters();
         loadText();
+
+        setupRecyclerViews();
     }
 
     private void loadPosters(){
@@ -61,4 +68,29 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void setupRecyclerViews() {
+        RecyclerView trailerRecyclerView = findViewById(R.id.details_trailer_recycler_view);
+        LinearLayoutManager trailersLinearLayoutManager = new LinearLayoutManager(this);
+        trailerRecyclerView.setLayoutManager(trailersLinearLayoutManager);
+        trailerRecyclerView.setHasFixedSize(true);
+        trailersAdapter = new TrailersAdapter(this);
+        trailerRecyclerView.setAdapter(trailersAdapter);
+
+        RecyclerView reviewsRecyclerView = findViewById(R.id.details_reviews_recycler_view);
+        LinearLayoutManager reviewsLinearLayoutManager = new LinearLayoutManager(this);
+        reviewsRecyclerView.setLayoutManager(reviewsLinearLayoutManager);
+        reviewsRecyclerView.setHasFixedSize(true);
+        reviewsAdapter = new ReviewsAdapter(this);
+        reviewsRecyclerView.setAdapter(reviewsAdapter);
+    }
+
+    @Override
+    public void onReviewClick(int clickedItemIndex) {
+
+    }
+
+    @Override
+    public void onTrailerClick(int clickedTrailerIndex) {
+
+    }
 }

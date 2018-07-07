@@ -139,5 +139,25 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_overview_label"
                 app:layout_constraintTop_toBottomOf="@+id/tv_overview_label" />
 
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/details_trailer_recycler_view"
+                android:scrollbars="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                tools:context=".MovieDetailsActivity"
+                android:background="@android:color/holo_blue_light">
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/details_reviews_recycler_view"
+                android:scrollbars="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                tools:context=".MovieDetailsActivity"
+                android:background="@android:color/holo_blue_light">
+            </android.support.v7.widget.RecyclerView>
+
         </android.support.constraint.ConstraintLayout>
 </layout>
