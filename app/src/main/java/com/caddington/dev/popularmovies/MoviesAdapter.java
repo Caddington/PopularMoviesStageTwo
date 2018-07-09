@@ -1,6 +1,5 @@
 package com.caddington.dev.popularmovies;
 
-import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -66,7 +65,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         Uri posterUri = Uri.parse(MovieService.BASE_POSTER_URL);
 
         if (movies != null) {
-            posterUri = Uri.parse(MovieService.BASE_POSTER_URL + MovieService.POSTER_SIZE_185 + movies.get(position).getPoster_path());
+            posterUri = Uri.parse(MovieService.BASE_POSTER_URL + MovieService.POSTER_SIZE_185 + movies.get(position).getPosterPath());
         }
 
         Picasso.get()
