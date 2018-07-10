@@ -6,6 +6,7 @@ import android.os.Parcelable;
 //Referenced source documentation for Parcelable implementation, at https://developer.android.com/reference/android/os/Parcelable
 public class Movie implements Parcelable {
 
+    private int id;
     private String title;
     private String overview;
     private Float vote_average;
@@ -24,6 +25,7 @@ public class Movie implements Parcelable {
     };
 
     private Movie(Parcel in){
+        id = in.readInt();
         title = in.readString();
         overview = in.readString();
         vote_average = in.readFloat();
@@ -38,6 +40,7 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int i) {
+        out.writeInt(id);
         out.writeString(title);
         out.writeString(overview);
         out.writeFloat(vote_average);
@@ -46,6 +49,14 @@ public class Movie implements Parcelable {
     }
 
     //GETTERS/SETTERS
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }

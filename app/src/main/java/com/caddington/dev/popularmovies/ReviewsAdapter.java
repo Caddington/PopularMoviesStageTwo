@@ -2,11 +2,14 @@ package com.caddington.dev.popularmovies;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewViewHolder>{
+
+    private static final String TAG = ReviewsAdapter.class.getSimpleName();
 
     private ReviewClickListener reviewClickListener;
 
@@ -26,7 +29,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
 
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
-
+        Log.d(TAG, "Review viewHolder bound at position" + String.valueOf(position));
     }
 
     @Override

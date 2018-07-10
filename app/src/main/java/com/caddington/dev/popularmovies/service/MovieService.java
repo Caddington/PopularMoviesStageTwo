@@ -1,6 +1,7 @@
 package com.caddington.dev.popularmovies.service;
 
 import com.caddington.dev.popularmovies.model.MovieList;
+import com.caddington.dev.popularmovies.model.TrailerList;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -22,6 +23,12 @@ public interface MovieService {
 
     @GET("movie/{ordering}")
     Call<MovieList> moviesSorted(@Path("ordering") String ordering, @Query("api_key") String apiKey);
+
+    @GET("movie/{id}/videos")
+    Call<TrailerList> movieTrailers(@Path("id") int id, @Query("api_key") String apiKey);
+
+    @GET("movie/{id}/reviews")
+    Call<TrailerList> movieReviews(@Path("id") int id, @Query("api_key") String apiKey);
 
     /*  Implement a static Retrofit builder in the interface itself, as seen in https://zeroturnaround.com/rebellabs/getting-started-with-retrofit-2/
         Chose this rather than building it in MainActivity to further abstract network operations from the activity itself.
