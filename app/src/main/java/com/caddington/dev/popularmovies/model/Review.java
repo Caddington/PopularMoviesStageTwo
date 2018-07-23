@@ -5,12 +5,13 @@ import android.os.Parcelable;
 
 public class Review implements Parcelable {
 
-    private int id;
+    private String id;
+
     private String author;
     private String content;
 
     protected Review(Parcel in) {
-        id = in.readInt();
+        id = in.readString();
         author = in.readString();
         content = in.readString();
     }
@@ -34,8 +35,25 @@ public class Review implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
+        parcel.writeString(id);
         parcel.writeString(author);
         parcel.writeString(content);
+    }
+
+    //GETTERS/SETTERS
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

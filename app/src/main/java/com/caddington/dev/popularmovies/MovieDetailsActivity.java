@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.caddington.dev.popularmovies.databinding.ActivityMoviedetailsBinding;
 import com.caddington.dev.popularmovies.model.Movie;
+import com.caddington.dev.popularmovies.model.ReviewList;
 import com.caddington.dev.popularmovies.model.TrailerList;
 import com.caddington.dev.popularmovies.service.MovieService;
 import com.squareup.picasso.Picasso;
@@ -47,6 +48,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
         setupRecyclerViews();
 
         fetchTrailers(movie.getId());
+        fetchReviews(movie.getId());
     }
 
     private void loadPosters(){
@@ -114,6 +116,30 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
 
             @Override
             public void onFailure(Call<TrailerList> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+            }
+        });
+    }
+
+    private void fetchReviews(int movieId) {
+        //Referred to Retrofit source documentation for constructing calls like this.
+        MovieService movieService = MovieService.retrofit.create(MovieService.class);
+        final Call<ReviewList> movieCall = movieService.movieReviews(movieId, "");
+        movieCall.enqueue(new Callback<ReviewList>() {
+            @Override
+            public void onResponse(Call<ReviewList> call, Response<ReviewList> response) {
+
+                if (response.body() != null){
+                    ReviewList reviewList = response.body();
+
+                    //Set adapter movieId and trailer list properties, force rebind of all items.
+                    reviewsAdapter.setReviews(reviewList.reviews);
+                    reviewsAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReviewList> call, Throwable t) {
                 Log.e(TAG, t.getMessage());
             }
         });

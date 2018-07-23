@@ -137,7 +137,7 @@
                 android:layout_marginEnd="8dp"
                 android:elevation="3dp"
                 android:gravity="start"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_overview_label"
                 app:layout_constraintTop_toBottomOf="@+id/tv_overview_label" />

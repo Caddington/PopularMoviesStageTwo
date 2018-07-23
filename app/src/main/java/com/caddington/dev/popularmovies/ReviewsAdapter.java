@@ -6,12 +6,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.caddington.dev.popularmovies.model.Review;
+
+import java.util.List;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewViewHolder>{
 
     private static final String TAG = ReviewsAdapter.class.getSimpleName();
 
     private ReviewClickListener reviewClickListener;
+
+    private List<Review> reviews;
 
     public ReviewsAdapter(ReviewClickListener reviewClickListener) {
         this.reviewClickListener = reviewClickListener;
@@ -30,22 +37,41 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         Log.d(TAG, "Review viewHolder bound at position" + String.valueOf(position));
+        if (reviews != null && !reviews.isEmpty()){
+            Log.d(TAG, reviews.get(position).getContent());
+            holder.reviewTextView.setText(reviews.get(position).getContent());
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        if (reviews != null) {
+            return reviews.size();
+        } else {
+            return 4;
+        }
     }
 
     public interface ReviewClickListener {
         void onReviewClick(int clickedItemIndex);
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     class ReviewViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        public TextView reviewTextView;
 
         public ReviewViewHolder(View itemView) {
             super(itemView);
+
+            reviewTextView = (TextView) itemView.findViewById(R.id.tv_review);
 
             itemView.setOnClickListener(this);
         }

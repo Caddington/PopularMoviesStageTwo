@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="185dp"
-    android:layout_height="150dp"
+    android:layout_height="150dp">
+
+    <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingStart="2dp"
     android:paddingEnd="2dp"
     android:paddingTop="2dp"
     android:layout_gravity="center_vertical"
-    android:background="@android:color/white">
+    android:background="@android:color/black">
 
     <!--<ImageView-->
         <!--android:id="@+id/iv_review"-->
@@ -15,13 +19,15 @@
         <!--android:layout_height="match_parent"-->
         <!--/>-->
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:text="Test Text"
-        android:textColor="@android:color/black"
-        android:layout_gravity="center"
-    />
-</FrameLayout>
+        <TextView
+            android:id="@+id/tv_review"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="11sp"
+            android:text="TextView"
+            tools:text="Test Text"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+        />
+    </FrameLayout>
+</ScrollView>
