@@ -71,7 +71,6 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
 
         if (trailers != null) {
             posterUri = Uri.parse(MovieService.BASE_TRAILER_URL + trailers.get(position).getKey() + MovieService.TRAILER_IMAGE);
-
         }
         Picasso.get()
                 .load(posterUri)

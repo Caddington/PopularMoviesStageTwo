@@ -6,9 +6,6 @@ import java.util.List;
 
 public class ReviewList {
 
-    @SerializedName("id")
-    int movieId;
-
     @SerializedName("results")
-    public List<Trailer> trailers;
+    public List<Review> reviews;
 }
