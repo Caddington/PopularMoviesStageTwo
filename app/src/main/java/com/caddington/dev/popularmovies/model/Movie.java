@@ -1,17 +1,44 @@
 package com.caddington.dev.popularmovies.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 //Referenced source documentation for Parcelable implementation, at https://developer.android.com/reference/android/os/Parcelable
+@Entity(tableName = "movie")
 public class Movie implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String title;
     private String overview;
-    private Float vote_average;
-    private String release_date;
-    private String poster_path;
+    @ColumnInfo(name = "vote_average")
+    private Float voteAverage;
+    @ColumnInfo(name = "release_date")
+    private String releaseDate;
+    @ColumnInfo(name = "poster_path")
+    private String posterPath;
+
+    @Ignore
+    public Movie(String title, String overview, Float voteAverage, String releaseDate, String posterPath) {
+        this.title = title;
+        this.overview = overview;
+        this.voteAverage = voteAverage;
+        this.releaseDate = releaseDate;
+        this.posterPath = posterPath;
+    }
+
+    public Movie(int id, String title, String overview, Float voteAverage, String releaseDate, String posterPath) {
+        this.id = id;
+        this.title = title;
+        this.overview = overview;
+        this.voteAverage = voteAverage;
+        this.releaseDate = releaseDate;
+        this.posterPath = posterPath;
+    }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>(){
         public Movie createFromParcel(Parcel in){
@@ -28,9 +55,9 @@ public class Movie implements Parcelable {
         id = in.readInt();
         title = in.readString();
         overview = in.readString();
-        vote_average = in.readFloat();
-        release_date = in.readString();
-        poster_path = in.readString();
+        voteAverage = in.readFloat();
+        releaseDate = in.readString();
+        posterPath = in.readString();
     }
 
     @Override
@@ -43,9 +70,9 @@ public class Movie implements Parcelable {
         out.writeInt(id);
         out.writeString(title);
         out.writeString(overview);
-        out.writeFloat(vote_average);
-        out.writeString(release_date);
-        out.writeString(poster_path);
+        out.writeFloat(voteAverage);
+        out.writeString(releaseDate);
+        out.writeString(posterPath);
     }
 
     //GETTERS/SETTERS
@@ -73,27 +100,27 @@ public class Movie implements Parcelable {
         this.overview = overview;
     }
 
-    public Float getVote_average() {
-        return vote_average;
+    public Float getVoteAverage() {
+        return voteAverage;
     }
 
-    public void setVote_average(Float vote_average) {
-        this.vote_average = vote_average;
+    public void setVoteAverage(Float voteAverage) {
+        this.voteAverage = voteAverage;
     }
 
-    public String getRelease_date() {
-        return release_date;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    public String getPoster_path() {
-        return poster_path;
+    public String getPosterPath() {
+        return posterPath;
     }
 
-    public void setPoster_path(String poster_path) {
-        this.poster_path = poster_path;
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 }
