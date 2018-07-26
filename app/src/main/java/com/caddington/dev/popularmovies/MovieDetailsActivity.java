@@ -53,7 +53,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
 
     private void loadPosters(){
 
-        Uri smallPosterUri = Uri.parse(MovieService.BASE_POSTER_URL + MovieService.POSTER_SIZE_185 + movie.getPosterPath());
+        Uri smallPosterUri = Uri.parse(MovieService.BASE_POSTER_URL + MovieService.POSTER_SIZE_185 + movie.getPoster_path());
 
         Picasso.get()
                 .load(smallPosterUri)
@@ -62,7 +62,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
                 .fit()
                 .into(binding.ivMoviePosterSmall);
 
-        Uri backgroundPosterUri = Uri.parse(MovieService.BASE_POSTER_URL + MovieService.POSTER_SIZE_ORIGINAL + movie.getPosterPath());
+        Uri backgroundPosterUri = Uri.parse(MovieService.BASE_POSTER_URL + MovieService.POSTER_SIZE_ORIGINAL + movie.getPoster_path());
 
         Picasso.get()
                 .load(backgroundPosterUri)
@@ -76,7 +76,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
     private void loadText(){
         binding.tvTitle.setText(movie.getTitle());
         binding.tvReleaseDate.setText(movie.getReleaseDate());
-        binding.tvVoteAverage.setText(String.valueOf(movie.getVoteAverage()));
+        binding.tvVoteAverage.setText(String.valueOf(movie.getVote_average()));
         binding.tvOverview.setText(movie.getOverview());
 
     }

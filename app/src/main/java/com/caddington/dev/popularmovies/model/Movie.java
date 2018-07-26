@@ -16,28 +16,28 @@ public class Movie implements Parcelable {
     private String title;
     private String overview;
     @ColumnInfo(name = "vote_average")
-    private Float voteAverage;
+    private Float vote_average;
     @ColumnInfo(name = "release_date")
     private String releaseDate;
     @ColumnInfo(name = "poster_path")
-    private String posterPath;
+    private String poster_path;
 
     @Ignore
     public Movie(String title, String overview, Float voteAverage, String releaseDate, String posterPath) {
         this.title = title;
         this.overview = overview;
-        this.voteAverage = voteAverage;
+        this.vote_average = voteAverage;
         this.releaseDate = releaseDate;
-        this.posterPath = posterPath;
+        this.poster_path = posterPath;
     }
 
-    public Movie(int id, String title, String overview, Float voteAverage, String releaseDate, String posterPath) {
+    public Movie(int id, String title, String overview, Float vote_average, String releaseDate, String poster_path) {
         this.id = id;
         this.title = title;
         this.overview = overview;
-        this.voteAverage = voteAverage;
+        this.vote_average = vote_average;
         this.releaseDate = releaseDate;
-        this.posterPath = posterPath;
+        this.poster_path = poster_path;
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>(){
@@ -55,9 +55,9 @@ public class Movie implements Parcelable {
         id = in.readInt();
         title = in.readString();
         overview = in.readString();
-        voteAverage = in.readFloat();
+        vote_average = in.readFloat();
         releaseDate = in.readString();
-        posterPath = in.readString();
+        poster_path = in.readString();
     }
 
     @Override
@@ -70,9 +70,9 @@ public class Movie implements Parcelable {
         out.writeInt(id);
         out.writeString(title);
         out.writeString(overview);
-        out.writeFloat(voteAverage);
+        out.writeFloat(vote_average);
         out.writeString(releaseDate);
-        out.writeString(posterPath);
+        out.writeString(poster_path);
     }
 
     //GETTERS/SETTERS
@@ -100,12 +100,12 @@ public class Movie implements Parcelable {
         this.overview = overview;
     }
 
-    public Float getVoteAverage() {
-        return voteAverage;
+    public Float getVote_average() {
+        return vote_average;
     }
 
-    public void setVoteAverage(Float voteAverage) {
-        this.voteAverage = voteAverage;
+    public void setVote_average(Float vote_average) {
+        this.vote_average = vote_average;
     }
 
     public String getReleaseDate() {
@@ -116,11 +116,11 @@ public class Movie implements Parcelable {
         this.releaseDate = releaseDate;
     }
 
-    public String getPosterPath() {
-        return posterPath;
+    public String getPoster_path() {
+        return poster_path;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+    public void setPoster_path(String posterPath) {
+        this.poster_path = posterPath;
     }
 }

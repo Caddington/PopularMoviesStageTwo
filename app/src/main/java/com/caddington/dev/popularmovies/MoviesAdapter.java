@@ -65,7 +65,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         Uri posterUri = Uri.parse(MovieService.BASE_POSTER_URL);
 
         if (movies != null) {
-            posterUri = Uri.parse(MovieService.BASE_POSTER_URL + MovieService.POSTER_SIZE_185 + movies.get(position).getPosterPath());
+            posterUri = Uri.parse(MovieService.BASE_POSTER_URL + MovieService.POSTER_SIZE_185 + movies.get(position).getPoster_path());
         }
 
         Picasso.get()
