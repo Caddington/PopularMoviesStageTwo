@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.caddington.dev.popularmovies.database.MovieDatabase;
 import com.caddington.dev.popularmovies.model.MovieList;
 import com.caddington.dev.popularmovies.service.MovieService;
 
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
     private MoviesAdapter moviesAdapter;
 
+    private MovieDatabase movieDatabase;
+
     //Enter your TMDb API key here for app to work.
     private String apiKey = "";
 
@@ -29,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Initialize database
+        movieDatabase = MovieDatabase.getInstance(this);
 
         RecyclerView movieRecyclerView = findViewById(R.id.movies_recycler_view);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);

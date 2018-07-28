@@ -16,6 +16,7 @@ public abstract class MovieDatabase extends RoomDatabase {
     private static final Object LOCK = new Object();
     private static MovieDatabase dbInstance;
 
+    //Singleton provider for app-wide db instance.
     public static MovieDatabase getInstance(Context context) {
         if (dbInstance == null) {
             synchronized (LOCK) {
@@ -28,4 +29,6 @@ public abstract class MovieDatabase extends RoomDatabase {
         Log.d(TAG, "Getting the database instance");
         return dbInstance;
     }
+
+    public abstract MovieDao movieDao();
 }
