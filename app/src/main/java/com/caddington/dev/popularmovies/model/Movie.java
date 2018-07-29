@@ -13,6 +13,7 @@ public class Movie implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+    //TODO: Add movieId property to store tMDB's ID in addition to the auto-generated Room row ID above.
     private String title;
     private String overview;
     @ColumnInfo(name = "vote_average")

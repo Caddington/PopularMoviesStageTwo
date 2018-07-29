@@ -1,6 +1,9 @@
 package com.caddington.dev.popularmovies;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,9 +12,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.caddington.dev.popularmovies.database.MovieDatabase;
+import com.caddington.dev.popularmovies.model.Movie;
 import com.caddington.dev.popularmovies.model.MovieList;
 import com.caddington.dev.popularmovies.service.MovieService;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,9 +28,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
     private MoviesAdapter moviesAdapter;
 
-    private MovieDatabase movieDatabase;
+    private MovieViewModel movieViewModel;
 
-    //Enter your TMDb API key here for app to work.
+    //TODO: Pull from raw resource file to avoid exposing API key through commits.
     private String apiKey = "";
 
     @Override
@@ -33,15 +38,17 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Initialize database
-        movieDatabase = MovieDatabase.getInstance(this);
+        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
-        RecyclerView movieRecyclerView = findViewById(R.id.movies_recycler_view);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        movieRecyclerView.setLayoutManager(gridLayoutManager);
-        movieRecyclerView.setHasFixedSize(true);
-        moviesAdapter = new MoviesAdapter(this);
-        movieRecyclerView.setAdapter(moviesAdapter);
+        movieViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(@Nullable List<Movie> movies) {
+
+            }
+        });
+
+        //Extracted to method to clean up onCreate clutter.
+        setupRecyclerView();
 
         queryMovies(MovieService.MOVIE_SORT_POPULAR);
     }
@@ -71,6 +78,15 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         }
 
         return true;
+    }
+
+    private void setupRecyclerView() {
+        RecyclerView movieRecyclerView = findViewById(R.id.movies_recycler_view);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        movieRecyclerView.setLayoutManager(gridLayoutManager);
+        movieRecyclerView.setHasFixedSize(true);
+        moviesAdapter = new MoviesAdapter(this);
+        movieRecyclerView.setAdapter(moviesAdapter);
     }
 
     //TODO: Move network call to Repository
@@ -107,6 +123,11 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
             intent.putExtra(getString(R.string.INTENT_EXTRA_KEY_MOVIE), moviesAdapter.getMovies().get(clickedItemIndex));
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
 

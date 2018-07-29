@@ -27,6 +27,7 @@ public class MovieViewModel extends AndroidViewModel{
     }
 
     //GETTERS/SETTERS
+    //LiveData wrapper
     public LiveData<List<Movie>> getAllMovies() {
         return allMovies;
     }
