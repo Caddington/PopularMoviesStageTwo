@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
     private MovieViewModel movieViewModel;
 
-    //TODO: Pull from raw resource file to avoid exposing API key through commits.
     private String apiKey = "";
 
     @Override
@@ -38,17 +37,17 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Extracted to method to clean up onCreate clutter.
+        setupRecyclerView();
+
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
-        movieViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
+        movieViewModel.getFavoriteMovies().observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
 
             }
         });
-
-        //Extracted to method to clean up onCreate clutter.
-        setupRecyclerView();
 
         queryMovies(MovieService.MOVIE_SORT_POPULAR);
     }
@@ -68,10 +67,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
         switch (id){
             case R.id.sort_popular:
-                queryMovies(MovieService.MOVIE_SORT_POPULAR);
+                    queryMovies(MovieService.MOVIE_SORT_POPULAR);
                 break;
             case R.id.sort_toprated:
-                queryMovies(MovieService.MOVIE_SORT_TOPRATED);
+                    queryMovies(MovieService.MOVIE_SORT_TOPRATED);
                 break;
             default:
                 break;

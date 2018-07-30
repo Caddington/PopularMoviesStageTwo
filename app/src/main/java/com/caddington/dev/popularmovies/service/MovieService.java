@@ -24,6 +24,7 @@ public interface MovieService {
 
     String MOVIE_SORT_POPULAR = "popular";
     String MOVIE_SORT_TOPRATED = "top_rated";
+    String MOVIE_SORT_FAVORITE = "favorite";
 
     @GET("movie/{ordering}")
     Call<MovieList> moviesSorted(@Path("ordering") String ordering, @Query("api_key") String apiKey);

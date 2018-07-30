@@ -15,12 +15,12 @@ public class MovieRepository {
 
     private MovieDao movieDao;
 
-    private LiveData<List<Movie>> allMovies;
+    private LiveData<List<Movie>> favoriteMovies;
 
     public MovieRepository(Application application){
         MovieDatabase movieDatabase = MovieDatabase.getInstance(application);
         movieDao = movieDatabase.movieDao();
-        allMovies = movieDao.getAllMovies();
+        favoriteMovies = movieDao.getFavoriteMovies();
     }
 
     public void insert (Movie movie){
@@ -43,7 +43,7 @@ public class MovieRepository {
     }
 
     //GETTERS/SETTERS
-    public LiveData<List<Movie>> getAllMovies() {
-        return allMovies;
+    public LiveData<List<Movie>> getFavoriteMovies() {
+        return favoriteMovies;
     }
 }

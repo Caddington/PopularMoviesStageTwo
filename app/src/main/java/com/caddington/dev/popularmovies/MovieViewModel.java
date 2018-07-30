@@ -13,13 +13,13 @@ public class MovieViewModel extends AndroidViewModel{
 
     private MovieRepository movieRepository;
 
-    private LiveData<List<Movie>> allMovies;
+    private LiveData<List<Movie>> favoriteMovies;
 
     public MovieViewModel(Application application){
         super(application);
 
         movieRepository = new MovieRepository(application);
-        allMovies = movieRepository.getAllMovies();
+        favoriteMovies = movieRepository.getFavoriteMovies();
     }
 
     public void insert(Movie movie){
@@ -28,7 +28,7 @@ public class MovieViewModel extends AndroidViewModel{
 
     //GETTERS/SETTERS
     //LiveData wrapper
-    public LiveData<List<Movie>> getAllMovies() {
-        return allMovies;
+    public LiveData<List<Movie>> getFavoriteMovies() {
+        return favoriteMovies;
     }
 }

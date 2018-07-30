@@ -44,6 +44,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
         if (movies != null){
             loadMoviePoster(holder.posterImageView, position);
+            Log.d(TAG, movies.get(position).getTitle());
         }
     }
 

@@ -16,10 +16,10 @@ import java.util.List;
 public interface MovieDao {
 
     @Query("SELECT * FROM movie ORDER BY title ASC")
-    public LiveData<List<Movie>> getAllMovies();
+    LiveData<List<Movie>> getFavoriteMovies();
 
     @Query("SELECT * FROM movie WHERE id = :id")
-    LiveData<Movie> getMovieById(int id);
+    Movie getMovieById(int id);
 
     @Insert
     public void insertMovie(Movie movie);
