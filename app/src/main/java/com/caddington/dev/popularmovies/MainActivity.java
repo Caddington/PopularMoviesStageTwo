@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
                 if (MovieService.MOVIE_SORT_POPULAR.equals(sortOrder)){
                     //TODO: Implement automatic UI update if movieViewModel.getSortOrder() is "favorite".
                     //Probably going to be something like:
-                    //moviesAdapter.setMovies
-                    //moviesAdapter.notifyDatasetChanged
+                    moviesAdapter.setMovies(new MovieList(movies));
+                    moviesAdapter.notifyDataSetChanged();
                 }
             }
         });

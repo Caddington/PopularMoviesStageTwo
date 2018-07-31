@@ -11,4 +11,6 @@ public class MovieList {
      */
     @SerializedName("results")
     public List<Movie> movies;
+
+    public MovieList(List<Movie> movies){}
 }
