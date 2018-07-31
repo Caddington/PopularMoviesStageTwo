@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
     private MovieViewModel movieViewModel;
 
     private String apiKey = "";
+    private String sortOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +43,21 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
+        sortOrder = movieViewModel.getSortOrder();
+
         movieViewModel.getFavoriteMovies().observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
-
+                if (MovieService.MOVIE_SORT_POPULAR.equals(sortOrder)){
+                    //TODO: Implement automatic UI update if movieViewModel.getSortOrder() is "favorite".
+                    //Probably going to be something like:
+                    //moviesAdapter.setMovies
+                    //moviesAdapter.notifyDatasetChanged
+                }
             }
         });
 
-        queryMovies(MovieService.MOVIE_SORT_POPULAR);
+        queryMovies(movieViewModel.getSortOrder());
     }
 
     @Override
@@ -68,9 +76,11 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         switch (id){
             case R.id.sort_popular:
                     queryMovies(MovieService.MOVIE_SORT_POPULAR);
+                    movieViewModel.setSortOrder(MovieService.MOVIE_SORT_POPULAR);
                 break;
             case R.id.sort_toprated:
                     queryMovies(MovieService.MOVIE_SORT_TOPRATED);
+                    movieViewModel.setSortOrder(MovieService.MOVIE_SORT_TOPRATED);
                 break;
             default:
                 break;

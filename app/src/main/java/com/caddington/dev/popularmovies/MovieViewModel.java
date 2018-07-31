@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
 import com.caddington.dev.popularmovies.model.Movie;
+import com.caddington.dev.popularmovies.service.MovieService;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public class MovieViewModel extends AndroidViewModel{
     private MovieRepository movieRepository;
 
     private LiveData<List<Movie>> favoriteMovies;
+
+    private String sortOrder = MovieService.MOVIE_SORT_POPULAR;
 
     public MovieViewModel(Application application){
         super(application);
@@ -30,5 +33,13 @@ public class MovieViewModel extends AndroidViewModel{
     //LiveData wrapper
     public LiveData<List<Movie>> getFavoriteMovies() {
         return favoriteMovies;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }

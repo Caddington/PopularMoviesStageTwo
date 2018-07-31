@@ -3,12 +3,14 @@ package com.caddington.dev.popularmovies.database;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
 
 import com.caddington.dev.popularmovies.model.Movie;
 
 @Database(entities = {Movie.class}, version = 1, exportSchema = false)
+@TypeConverters({DateConverter.class})
 public abstract class MovieDatabase extends RoomDatabase {
 
     private static final String TAG = MovieDatabase.class.getSimpleName();
