@@ -38,7 +38,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         Log.d(TAG, "Review viewHolder bound at position" + String.valueOf(position));
         if (reviews != null && !reviews.isEmpty()){
-            Log.d(TAG, reviews.get(position).getContent());
             holder.reviewTextView.setText(reviews.get(position).getContent());
         }
     }

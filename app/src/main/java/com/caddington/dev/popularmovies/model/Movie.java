@@ -13,13 +13,12 @@ public class Movie implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    //TODO: Add movieId property to store tMDB's ID in addition to the auto-generated Room row ID above.
     private String title;
     private String overview;
     @ColumnInfo(name = "vote_average")
     private Float vote_average;
     @ColumnInfo(name = "release_date")
-    private String releaseDate;
+    private String release_date;
     @ColumnInfo(name = "poster_path")
     private String poster_path;
 
@@ -28,16 +27,16 @@ public class Movie implements Parcelable {
         this.title = title;
         this.overview = overview;
         this.vote_average = voteAverage;
-        this.releaseDate = releaseDate;
+        this.release_date = releaseDate;
         this.poster_path = posterPath;
     }
 
-    public Movie(int id, String title, String overview, Float vote_average, String releaseDate, String poster_path) {
+    public Movie(int id, String title, String overview, Float vote_average, String release_date, String poster_path) {
         this.id = id;
         this.title = title;
         this.overview = overview;
         this.vote_average = vote_average;
-        this.releaseDate = releaseDate;
+        this.release_date = release_date;
         this.poster_path = poster_path;
     }
 
@@ -57,7 +56,7 @@ public class Movie implements Parcelable {
         title = in.readString();
         overview = in.readString();
         vote_average = in.readFloat();
-        releaseDate = in.readString();
+        release_date = in.readString();
         poster_path = in.readString();
     }
 
@@ -72,7 +71,7 @@ public class Movie implements Parcelable {
         out.writeString(title);
         out.writeString(overview);
         out.writeFloat(vote_average);
-        out.writeString(releaseDate);
+        out.writeString(release_date);
         out.writeString(poster_path);
     }
 
@@ -109,12 +108,12 @@ public class Movie implements Parcelable {
         this.vote_average = vote_average;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getRelease_date() {
+        return release_date;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setRelease_date(String releaseDate) {
+        this.release_date = releaseDate;
     }
 
     public String getPoster_path() {

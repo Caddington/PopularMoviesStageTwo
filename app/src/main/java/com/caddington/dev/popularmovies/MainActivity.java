@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         movieRecyclerView.setAdapter(moviesAdapter);
     }
 
-    //TODO: Move network call to Repository
     //Handle querying movies to keep onCreate clean. Accepts sort type as parameter
     private void queryMovies(String sortOrder) {
         //Referred to Retrofit source documentation for constructing calls like this.

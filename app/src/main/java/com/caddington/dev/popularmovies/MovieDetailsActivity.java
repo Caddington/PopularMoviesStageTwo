@@ -75,7 +75,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
 
     private void loadText(){
         binding.tvTitle.setText(movie.getTitle());
-        binding.tvReleaseDate.setText(movie.getReleaseDate());
+        binding.tvReleaseDate.setText(movie.getRelease_date());
         binding.tvVoteAverage.setText(String.valueOf(movie.getVote_average()));
         binding.tvOverview.setText(movie.getOverview());
 

@@ -6,4 +6,5 @@
     <string name="label_menu_sort_popularity">Popularity</string>
     <string name="label_menu_sort_toprated">Top Rated</string>
     <string name="INTENT_EXTRA_KEY_MOVIE">movie</string>
+    <string name="label_favorite_switch">Favorite</string>
 </resources>
