@@ -25,8 +25,12 @@ public class MovieViewModel extends AndroidViewModel{
         favoriteMovies = movieRepository.getFavoriteMovies();
     }
 
-    public void insert(Movie movie){
-        movieRepository.insert(movie);
+    public void insertFavorite(Movie movie){
+        movieRepository.insertFavorite(movie);
+    }
+
+    public void deleteFavorite(Movie movie){
+        movieRepository.deleteFavorite(movie);
     }
 
     //GETTERS/SETTERS
