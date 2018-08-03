@@ -1,5 +1,6 @@
 package com.caddington.dev.popularmovies;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.caddington.dev.popularmovies.databinding.ActivityMoviedetailsBinding;
 import com.caddington.dev.popularmovies.model.Movie;
@@ -25,6 +27,8 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
 
     Movie movie;
 
+    MovieViewModel movieViewModel;
+
     ActivityMoviedetailsBinding binding;
 
     private static final String TAG = MovieDetailsActivity.class.getSimpleName();
@@ -36,23 +40,33 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+
         //Android documentation's binding creation suggestion (https://developer.android.com/topic/libraries/data-binding/expressions#binding_data)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_moviedetails);
-
-        binding.switchFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked){
-                    Log.d(TAG, "Checked");
-                }else{
-                    Log.d(TAG, "Not checked");
-                }
-            }
-        });
 
         if (getIntent().getParcelableExtra("movie") != null){
             movie = (Movie) getIntent().getParcelableExtra("movie");
         }
+
+        //Switch toggle listener to add/remove movie from Room DB.
+        binding.switchFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked){
+                    movieViewModel.insertFavorite(movie);
+
+                    Toast addFavoriteToast = Toast.makeText(getApplicationContext(), getString(R.string.toast_db_insert_favorite), Toast.LENGTH_SHORT);
+                    addFavoriteToast.show();
+                }else{
+                    movieViewModel.deleteFavorite(movie);
+
+                    Toast addFavoriteToast = Toast.makeText(getApplicationContext(), getString(R.string.toast_db_delete_favorite), Toast.LENGTH_SHORT);
+                    addFavoriteToast.show();
+                }
+            }
+        });
+
 
         loadPosters();
         loadText();

@@ -45,19 +45,24 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
         sortOrder = movieViewModel.getSortOrder();
 
+        //Observe favorites, update on change if user selects "Favorites" sort order in ActionBar overflow menu.
         movieViewModel.getFavoriteMovies().observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
-                if (MovieService.MOVIE_SORT_POPULAR.equals(sortOrder)){
-                    //TODO: Implement automatic UI update if movieViewModel.getSortOrder() is "favorite".
-                    //Probably going to be something like:
+                if (MovieService.MOVIE_SORT_FAVORITE.equals(sortOrder)){
                     moviesAdapter.setMovies(new MovieList(movies));
                     moviesAdapter.notifyDataSetChanged();
                 }
             }
         });
 
-        queryMovies(movieViewModel.getSortOrder());
+        //Load top-rated or popular movies check for non-observed data.
+        if (MovieService.MOVIE_SORT_POPULAR.equals(sortOrder)) {
+            queryMovies(sortOrder);
+        }else if (MovieService.MOVIE_SORT_TOPRATED.equals(sortOrder)){
+            queryMovies(sortOrder);
+        }
+
     }
 
     @Override
@@ -75,12 +80,15 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
         switch (id){
             case R.id.sort_popular:
-                    queryMovies(MovieService.MOVIE_SORT_POPULAR);
-                    movieViewModel.setSortOrder(MovieService.MOVIE_SORT_POPULAR);
+                queryMovies(MovieService.MOVIE_SORT_POPULAR);
+                movieViewModel.setSortOrder(MovieService.MOVIE_SORT_POPULAR);
                 break;
             case R.id.sort_toprated:
-                    queryMovies(MovieService.MOVIE_SORT_TOPRATED);
-                    movieViewModel.setSortOrder(MovieService.MOVIE_SORT_TOPRATED);
+                queryMovies(MovieService.MOVIE_SORT_TOPRATED);
+                movieViewModel.setSortOrder(MovieService.MOVIE_SORT_TOPRATED);
+                break;
+            case R.id.sort_favorite:
+                movieViewModel.setSortOrder(MovieService.MOVIE_SORT_FAVORITE);
                 break;
             default:
                 break;

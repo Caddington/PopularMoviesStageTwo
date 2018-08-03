@@ -7,4 +7,7 @@
     <item android:id="@+id/sort_toprated"
         android:title="@string/label_menu_sort_toprated"
         app:showAsAction="never"/>
+    <item android:id="@+id/sort_favorite"
+        android:title="@string/label_menu_sort_favorites"
+        app:showAsAction="never"/>
 </menu>

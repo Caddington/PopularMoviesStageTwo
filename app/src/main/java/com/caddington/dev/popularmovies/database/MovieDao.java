@@ -21,7 +21,7 @@ public interface MovieDao {
     @Query("SELECT * FROM movie WHERE id = :id")
     Movie getMovieById(int id);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertMovie(Movie movie);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
