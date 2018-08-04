@@ -54,7 +54,7 @@ public class MovieRepository {
 
         @Override
         protected Void doInBackground(Movie... movies) {
-            asyncTaskDao.deleteMovie(movies[0]);
+            asyncTaskDao.deleteMovie(movies[0].getId());
             return null;
         }
     }

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.caddington.dev.popularmovies.model.Movie;
 import com.caddington.dev.popularmovies.model.MovieList;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
                 if (MovieService.MOVIE_SORT_FAVORITE.equals(sortOrder)){
-                    moviesAdapter.setMovies(new MovieList(movies));
+                    moviesAdapter.setMovies(movies);
                     moviesAdapter.notifyDataSetChanged();
                 }
             }
@@ -88,7 +89,18 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
                 movieViewModel.setSortOrder(MovieService.MOVIE_SORT_TOPRATED);
                 break;
             case R.id.sort_favorite:
-                movieViewModel.setSortOrder(MovieService.MOVIE_SORT_FAVORITE);
+                List<Movie> favoriteMovies = movieViewModel.getFavoriteMovies().getValue();
+
+                if (favoriteMovies != null || favoriteMovies.isEmpty()){
+
+                    moviesAdapter.setMovies(favoriteMovies);
+                    moviesAdapter.notifyDataSetChanged();
+
+                    movieViewModel.setSortOrder(MovieService.MOVIE_SORT_FAVORITE);
+                }else{
+                    Toast addFavoriteToast = Toast.makeText(getApplicationContext(), getString(R.string.toast_db_error_no_favorites), Toast.LENGTH_SHORT);
+                    addFavoriteToast.show();
+                }
                 break;
             default:
                 break;
@@ -119,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
                     MovieList movieList = response.body();
 
                     //Set adapter movie list property and force rebind of all grid items.
-                    moviesAdapter.setMovies(movieList);
+                    moviesAdapter.setMovies(movieList.movies);
                     moviesAdapter.notifyDataSetChanged();
                 }
             }

@@ -78,8 +78,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     //Setter used in MainActivity to pass retrieved movies.
-    public void setMovies(MovieList movieList){
-        this.movies = movieList.movies;
+    public void setMovies(List<Movie> movies){
+        this.movies = movies;
     }
 
     public List<Movie> getMovies(){
