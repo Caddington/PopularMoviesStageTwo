@@ -29,6 +29,7 @@ public class MovieRepository {
 
     public void deleteFavorite(Movie movie){ new deleteFavoriteAsync(movieDao).execute(movie);}
 
+    //AsyncTask Definitions
     private static class insertAsyncTask extends AsyncTask<Movie, Void, Void>{
 
         private MovieDao asyncTaskDao;

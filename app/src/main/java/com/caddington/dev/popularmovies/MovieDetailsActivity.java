@@ -45,8 +45,12 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
         //Android documentation's binding creation suggestion (https://developer.android.com/topic/libraries/data-binding/expressions#binding_data)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_moviedetails);
 
-        if (getIntent().getParcelableExtra("movie") != null){
-            movie = (Movie) getIntent().getParcelableExtra("movie");
+        if (getIntent().getParcelableExtra(movieViewModel.INTENT_EXTRA_KEY_MOVIE) != null){
+            movie = (Movie) getIntent().getParcelableExtra(movieViewModel.INTENT_EXTRA_KEY_MOVIE);
+        }
+
+        if (getIntent().getParcelableExtra(movieViewModel.INTENT_EXTRA_KEY_FAVORITE) != null){
+            binding.switchFavorite.setChecked(true);
         }
 
         //Switch toggle listener to add/remove movie from Room DB.

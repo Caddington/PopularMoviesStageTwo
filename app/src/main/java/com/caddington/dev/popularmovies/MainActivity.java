@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
     private MovieViewModel movieViewModel;
 
     private String apiKey = "";
-    private String sortOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +43,11 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
-        sortOrder = movieViewModel.getSortOrder();
-
         //Observe favorites, update on change if user selects "Favorites" sort order in ActionBar overflow menu.
         movieViewModel.getFavoriteMovies().observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
-                if (MovieService.MOVIE_SORT_FAVORITE.equals(sortOrder)){
+                if (MovieService.MOVIE_SORT_FAVORITE.equals(movieViewModel.getSortOrder())){
                     moviesAdapter.setMovies(movies);
                     moviesAdapter.notifyDataSetChanged();
                 }
@@ -58,10 +55,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         });
 
         //Load top-rated or popular movies check for non-observed data.
-        if (MovieService.MOVIE_SORT_POPULAR.equals(sortOrder)) {
-            queryMovies(sortOrder);
-        }else if (MovieService.MOVIE_SORT_TOPRATED.equals(sortOrder)){
-            queryMovies(sortOrder);
+        if (MovieService.MOVIE_SORT_POPULAR.equals(movieViewModel.getSortOrder())) {
+            queryMovies(movieViewModel.getSortOrder());
+        }else if (MovieService.MOVIE_SORT_TOPRATED.equals(movieViewModel.getSortOrder())){
+            queryMovies(movieViewModel.getSortOrder());
         }
 
     }
@@ -90,13 +87,11 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
                 break;
             case R.id.sort_favorite:
                 List<Movie> favoriteMovies = movieViewModel.getFavoriteMovies().getValue();
+                movieViewModel.setSortOrder(MovieService.MOVIE_SORT_FAVORITE);
 
                 if (favoriteMovies != null || favoriteMovies.isEmpty()){
-
                     moviesAdapter.setMovies(favoriteMovies);
                     moviesAdapter.notifyDataSetChanged();
-
-                    movieViewModel.setSortOrder(MovieService.MOVIE_SORT_FAVORITE);
                 }else{
                     Toast addFavoriteToast = Toast.makeText(getApplicationContext(), getString(R.string.toast_db_error_no_favorites), Toast.LENGTH_SHORT);
                     addFavoriteToast.show();
@@ -118,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
         movieRecyclerView.setAdapter(moviesAdapter);
     }
 
-    //Handle querying movies to keep onCreate clean. Accepts sort type as parameter
+    //Handle querying popular and top-rated movies to keep onCreate clean. Accepts sort type as parameter
     private void queryMovies(String sortOrder) {
         //Referred to Retrofit source documentation for constructing calls like this.
         MovieService movieService = MovieService.retrofit.create(MovieService.class);
@@ -148,7 +143,12 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Gri
 
         if (moviesAdapter.getMovies() != null){
             Intent intent = new Intent(this, MovieDetailsActivity.class);
-            intent.putExtra(getString(R.string.INTENT_EXTRA_KEY_MOVIE), moviesAdapter.getMovies().get(clickedItemIndex));
+            intent.putExtra(movieViewModel.INTENT_EXTRA_KEY_MOVIE, moviesAdapter.getMovies().get(clickedItemIndex));
+
+            if (MovieService.MOVIE_SORT_FAVORITE.equals(movieViewModel.getSortOrder())){
+                intent.putExtra(movieViewModel.INTENT_EXTRA_KEY_FAVORITE, moviesAdapter.getMovies().get(clickedItemIndex));
+            }
+
             startActivity(intent);
         }
     }

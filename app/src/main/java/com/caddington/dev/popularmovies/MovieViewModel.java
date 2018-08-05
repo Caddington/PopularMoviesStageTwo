@@ -12,6 +12,12 @@ import java.util.List;
 //ViewModel implementation adapted from Google's Android Room with a View codelab boilerplate: https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#8
 public class MovieViewModel extends AndroidViewModel{
 
+    public static final int QUERY_IS_FAVORITE = 1;
+    public static final int QUERY_NOT_FAVORITE = -1;
+
+    public static final String INTENT_EXTRA_KEY_MOVIE = "movie";
+    public static final String INTENT_EXTRA_KEY_FAVORITE = "favorite";
+
     private MovieRepository movieRepository;
 
     private LiveData<List<Movie>> favoriteMovies;
