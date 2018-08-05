@@ -131,6 +131,40 @@
                 app:layout_constraintTop_toBottomOf="@+id/switch_favorite" />
 
             <TextView
+                android:id="@+id/tv_trailer_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="8dp"
+                android:elevation="3dp"
+                android:gravity="center"
+                android:text="@string/label_trailer"
+                tools:text="Trailers"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/details_trailer_recycler_view"
+                app:layout_constraintStart_toStartOf="@+id/details_trailer_recycler_view"
+                app:layout_constraintTop_toBottomOf="@+id/tv_overview" />
+
+            <TextView
+                android:id="@+id/tv_review_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="8dp"
+                android:elevation="3dp"
+                android:gravity="center"
+                android:text="@string/label_reviews"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/details_reviews_recycler_view"
+                app:layout_constraintStart_toStartOf="@+id/details_trailer_recycler_view"
+                app:layout_constraintTop_toBottomOf="@+id/details_trailer_recycler_view"
+                tools:text="What people are saying" />
+
+            <TextView
                 android:id="@+id/tv_overview"
                 android:layout_width="335dp"
                 android:layout_height="wrap_content"
@@ -149,33 +183,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/holo_blue_light"
+                android:background="@color/colorPrimaryDark"
                 android:scrollbars="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_overview"
-                tools:context=".MovieDetailsActivity">
-            </android.support.v7.widget.RecyclerView>
+                app:layout_constraintTop_toBottomOf="@+id/tv_trailer_label"
+                tools:context=".MovieDetailsActivity"
+                tools:layout_editor_absoluteY="413dp"
+            />
 
             <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/details_reviews_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/holo_blue_light"
-                android:scrollbars="horizontal"
+                android:background="@color/colorPrimaryDark"
+                android:padding="2dp"
+                android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_trailer_recycler_view"
-                tools:context=".MovieDetailsActivity">
-            </android.support.v7.widget.RecyclerView>
+                tools:context=".MovieDetailsActivity"
+            />
 
             <Switch
                 android:id="@+id/switch_favorite"

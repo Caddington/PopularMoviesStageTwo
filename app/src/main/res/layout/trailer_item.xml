@@ -5,18 +5,13 @@
     android:layout_height="150dp"
     android:paddingStart="2dp"
     android:paddingEnd="2dp"
+    android:layout_marginEnd="1dp"
     android:layout_gravity="center_vertical"
     android:background="@android:color/black">
-
-    <!--<ImageView-->
-        <!--android:id="@+id/iv_trailer"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-    <!--/>-->
 
     <ImageView
         android:id="@+id/iv_trailer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@android:color/holo_blue_bright" />
+        app:srcCompat="@color/colorPrimary" />
 </FrameLayout>

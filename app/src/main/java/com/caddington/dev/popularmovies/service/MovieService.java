@@ -16,7 +16,8 @@ public interface MovieService {
     String BASE_URL = "https://api.themoviedb.org/3/";
     String BASE_POSTER_URL = "http://image.tmdb.org/t/p/";
 
-    String BASE_TRAILER_URL = "https://img.youtube.com/vi/";
+    String BASE_TRAILER_URL = "https://www.youtube.com/watch?v=";
+    String BASE_TRAILER_THUMBNAIL_URL = "https://img.youtube.com/vi/";
     String TRAILER_IMAGE = "/0.jpg";
 
     String POSTER_SIZE_185 = "w185";

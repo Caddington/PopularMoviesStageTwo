@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="185dp"
-    android:layout_height="150dp">
-
-    <FrameLayout
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="2dp"
-    android:paddingEnd="2dp"
-    android:paddingTop="2dp"
+    android:layout_height="wrap_content"
+    android:paddingTop="1dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
     android:layout_gravity="center_vertical"
     android:background="@android:color/black">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/iv_review"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--/>-->
-
-        <TextView
-            android:id="@+id/tv_review"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="11sp"
-            android:text="TextView"
-            tools:text="Test Text"
-            android:textColor="@android:color/white"
-            android:layout_gravity="center"
-        />
-    </FrameLayout>
-</ScrollView>
+    <TextView
+        android:id="@+id/tv_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:textSize="12sp"
+        tools:text="Test Text"
+        android:textColor="@android:color/black"
+        android:fontFamily="casual"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:background="@color/colorPrimary"
+    />
+</FrameLayout>

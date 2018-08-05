@@ -1,6 +1,7 @@
 package com.caddington.dev.popularmovies;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -119,7 +120,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
         trailerRecyclerView.setAdapter(trailersAdapter);
 
         RecyclerView reviewsRecyclerView = findViewById(R.id.details_reviews_recycler_view);
-        LinearLayoutManager reviewsLinearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager reviewsLinearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         reviewsRecyclerView.setLayoutManager(reviewsLinearLayoutManager);
         reviewsRecyclerView.setHasFixedSize(true);
         reviewsAdapter = new ReviewsAdapter(this);
@@ -183,5 +184,11 @@ public class MovieDetailsActivity extends AppCompatActivity implements ReviewsAd
     @Override
     public void onTrailerClick(int clickedTrailerIndex) {
         Log.d(TAG, "Trailer viewHolder clicked at position " + String.valueOf(clickedTrailerIndex));
+
+        Uri trailerUri = Uri.parse(MovieService.BASE_TRAILER_URL + trailersAdapter.getTrailers().get(clickedTrailerIndex).getKey());
+        if (trailerUri != null){
+            Intent trailerIntent = new Intent(Intent.ACTION_VIEW, trailerUri);
+            startActivity(trailerIntent);
+        }
     }
 }

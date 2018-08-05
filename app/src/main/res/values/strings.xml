@@ -10,4 +10,6 @@
     <string name="toast_db_insert_favorite">Added to favorites.</string>
     <string name="toast_db_delete_favorite">Removed from favorites.</string>
     <string name="toast_db_error_no_favorites">No favorites added yet.</string>
+    <string name="label_reviews">What people are saying</string>
+    <string name="label_trailer">Trailers</string>
 </resources>
